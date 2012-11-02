@@ -35,6 +35,8 @@ let g:outline_enableAutoRefresh = 1
 	"set 0 if you dont want to refresh outlineBuf automatically
 let g:outline_enableAutoFocus = 1
 	"set 0 if you dont want to focus the node automatically
+let g:outline_enableAutoClose = 1
+	"set 0 if you dont want to close after focus the node automatically
 
 "============================================================================
 
@@ -192,7 +194,11 @@ endfun
 		nnoremap <buffer> i <ESC>
 		nnoremap <buffer> r :OutlineRefresh<CR>
 		nnoremap <buffer> q :OutlineClose<CR>
-		nnoremap <buffer> <Enter> :OutlineJump<CR>
+		if g:outline_enableAutoClose
+			nnoremap <buffer> <Enter> :OutlineJump<CR>:OutlineClose<CR>
+		else
+			nnoremap <buffer> <Enter> :OutlineJump<CR>
+		endif
 	endfun
 
 "============================================
